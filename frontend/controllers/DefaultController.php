@@ -36,7 +36,7 @@ class DefaultController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','logout'],
+                        'actions' => ['index','logout','profile','view','search','update'],
                         'roles' => ['@'],
                     ],
                 ],

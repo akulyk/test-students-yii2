@@ -3,6 +3,7 @@
 namespace application\entities\Student;
 
 use Yii;
+use application\entities\User\User;
 
 /**
  * This is the model class for table "{{%student}}".
@@ -72,13 +73,13 @@ class Student extends \yii\db\ActiveRecord
                                   string $residence,
                                   string $group_number,
                                   int $rates,
-                                  int $user_id): self
+                                  int $user_id = 0): self
     {
         $student = new Student();
-        $student->firstname    = $firstname;
-        $student->lastname     = $lastname;
+        $student->firstname    = ucfirst($firstname);
+        $student->lastname     = ucfirst($lastname);
         $student->gender       = $gender;
-        $student->birthdate    = $birthdate;
+        $student->birthdate    = (!is_numeric($birthdate)) ? strtotime($birthdate) : $birthdate;
         $student->residence    = $residence;
         $student->group_number = $group_number;
         $student->rates        = $rates;
@@ -88,6 +89,50 @@ class Student extends \yii\db\ActiveRecord
 
         return $student;
     }/**/
+
+
+
+
+
+    public function getFullname(){
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getResidence(){
+        $residences = static::getResidenceStates();
+        if(array_key_exists($this->residence,$residences)) {
+            return $residences[$this->residence];
+        }
+    }/**/
+
+    public function getGender(){
+        $genders = static::getGenders();
+        if(array_key_exists($this->gender,$genders)) {
+            return $genders[$this->gender];
+        }
+    }/**/
+
+    public function getBirthdate(){
+        return date("Y-m-d",$this->birthdate);
+    }
+
+    public function getEmail(){
+        return $this->user->email;
+    }
+
+    public static function getGenders(){
+
+        return ['M'=>'Male','F'=>'Female'];
+
+    }/**/
+
+    public static function getResidenceStates(){
+
+        return ['local'=>'Local','foreign'=>'Foreign'];
+
+    }/**/
+
+
 
 
 }/* end of Entity */

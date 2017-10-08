@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use application\entities\Student\StudentSearch;
+use application\forms\student\SearchForm;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -63,8 +65,19 @@ class SiteController extends DefaultController
      */
     public function actionIndex()
     {
+        $searchModel = new StudentSearch();
+        $form = new SearchForm();
+        $form->load(Yii::$app->request->queryParams);
+      //  var_dump(Yii::$app->request->queryParams,$form->load(Yii::$app->request->queryParams),$form);die;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$form);
 
-        return $this->render('index');
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchForm' =>$form
+        ]);
+
     }
 
     /**

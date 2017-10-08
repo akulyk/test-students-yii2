@@ -1,53 +1,89 @@
 <?php
 
+use yii\grid\GridView;
+use \application\entities\Student\Student;
+use application\grids\columns\HighlightedColumn;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Students Managment System';
 ?>
+
+<div class="search-form">
+    <?php $form = ActiveForm::begin(['options'=>['class'=>'form-inline'],
+    'method'=>'get']);?>
+
+        <?php echo $form->field($searchForm,'query')
+        ->input('text',['class'=>'form-control'])->label(false);
+            ?>
+
+
+        <?php   echo Html::submitButton('Search', ['class' => 'btn btn-primary', 'name' => 'search-button']);?>
+            &nbsp;
+        <?php   echo Html::a('Reset',[''], ['class' => 'btn btn-danger',
+                'name' => 'reset-button',
+           //     'onclick'=>"return resetForm(this.form);"
+            ]) ?>
+
+    <?php ActiveForm::end();?>
+</div>
+
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+            'id',
+            ['attribute' => 'firstname',
+                'value' => function($model)use ($searchForm){
+                return HighlightedColumn::highlight($model->firstname,$searchForm->query);
+                },
+                'format'=>'raw'
+            ],
+            ['attribute' => 'lastname',
+                'value' => function($model)use ($searchForm){
+                    return HighlightedColumn::highlight($model->lastname,$searchForm->query);
+                },
+                'format'=>'raw'
+            ],
+            ['attribute'=>'birthdate',
+             'value'=>function($model){
+               return $model->getBirthdate();
+                }
+            ],
+            ['attribute'=>'gender',
+            'value'=>function($model){
+                return $model->getGender();
+            },
+                'filter'=>Student::getGenders()
+            ],
+            ['attribute'=>'residence',
+                'value'=>function($model){
+                    return $model->getResidence();
+                },
+                'filter'=>Student::getResidenceStates()
+            ],
+            ['attribute' => 'group_number',
+                'value' => function($model)use ($searchForm){
+                    return HighlightedColumn::highlight($model->group_number,$searchForm->query);
+                },
+                'format'=>'raw'
+            ],
+            ['attribute' => 'rates',
+                'value' => function($model)use ($searchForm){
+                    return HighlightedColumn::highlight($model->rates,$searchForm->query);
+                },
+                'format'=>'raw'
+            ],
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+           
 
-    <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        ],
+    ]); ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
 </div>

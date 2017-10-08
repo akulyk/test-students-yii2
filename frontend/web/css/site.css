@@ -101,6 +101,17 @@ a.desc:after {
     border: none;
 }
 
+.search-form > form{
+    margin:20px 5px;
+}
+
+.field-searchform-query > p{
+    display: none;
+}
+span.highlighted{
+    background-color: #5cb85c;
+}
+
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;

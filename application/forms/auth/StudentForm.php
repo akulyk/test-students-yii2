@@ -2,7 +2,7 @@
 namespace application\forms\auth;
 
 use yii\base\Model;
-use shop\entities\User\User;
+use application\entities\Student\Student;
 
 /**
  * Signup form
@@ -87,13 +87,13 @@ class StudentForm extends Model
 
     public function getGenders(){
 
-     return ['M'=>'Male','F'=>'Female'];
+     return Student::getGenders();
 
     }/**/
 
     public function getResidenceStates(){
 
-        return ['local'=>'Local','foreign'=>'Foreign'];
+        return Student::getResidenceStates();
 
     }/**/
 

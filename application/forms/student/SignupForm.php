@@ -4,7 +4,6 @@ namespace application\forms\auth;
 use yii\base\Model;
 use application\entities\User\User;
 use application\forms\auth\StudentForm;
-use yii\helpers\ArrayHelper;
 
 /**
  * Signup form
@@ -52,29 +51,21 @@ class SignupForm extends Model
      */
     public function rules()
     {
-        $rules = [
+        return [
 
 
-
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
 
             [['password','password_repeat'], 'required'],
             [['password','password_repeat'], 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
         ];
-
-        return ArrayHelper::merge(static::EmailRules(),$rules);
-
     }/**/
 
-    public static function EmailRules(){
-        return [
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique','except'=>'update', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
-        ];
-    }/**/
 
 
 
