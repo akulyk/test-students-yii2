@@ -13,7 +13,7 @@ $this->title = 'Students Managment System';
 
 <div class="search-form">
     <?php $form = ActiveForm::begin(['options'=>['class'=>'form-inline'],
-    'method'=>'get']);?>
+    'method'=>'get','action'=>['']]);?>
 
         <?php echo $form->field($searchForm,'query')
         ->input('text',['class'=>'form-control'])->label(false);
@@ -80,7 +80,7 @@ $this->title = 'Students Managment System';
                 'format'=>'raw'
             ],
 
-           
+
 
 
         ],
