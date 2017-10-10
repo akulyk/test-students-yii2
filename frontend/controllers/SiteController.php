@@ -13,8 +13,8 @@ use application\forms\auth\PasswordResetRequestForm;
 use application\forms\auth\ResetPasswordForm;
 use application\forms\auth\SignupForm;
 use yii\helpers\ArrayHelper;
-use application\services\Auth\AuthService;
-use application\services\Auth\SignupService;
+use application\services\auth\AuthService;
+use application\services\auth\SignupService;
 
 /**
  * Site controller
