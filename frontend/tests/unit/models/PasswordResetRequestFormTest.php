@@ -7,7 +7,7 @@ use frontend\models\PasswordResetRequestForm;
 use common\fixtures\UserFixture as UserFixture;
 use common\models\User;
 
-class PasswordResetRequestFormTest extends \Codeception\Test\Unit
+class PasswordResetRequestFormTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \frontend\tests\UnitTester

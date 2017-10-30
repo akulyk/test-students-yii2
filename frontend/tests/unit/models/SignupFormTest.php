@@ -4,7 +4,7 @@ namespace frontend\tests\unit\models;
 use common\fixtures\UserFixture;
 use frontend\models\SignupForm;
 
-class SignupFormTest extends \Codeception\Test\Unit
+class SignupFormTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \frontend\tests\UnitTester

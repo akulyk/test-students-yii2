@@ -9,7 +9,7 @@ use common\fixtures\UserFixture as UserFixture;
 /**
  * Login form test
  */
-class LoginFormTest extends \Codeception\Test\Unit
+class LoginFormTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \common\tests\UnitTester
@@ -19,12 +19,7 @@ class LoginFormTest extends \Codeception\Test\Unit
 
     public function _before()
     {
-        $this->tester->haveFixtures([
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
-        ]);
+
     }
 
     public function testLoginNoUser()
@@ -54,7 +49,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     {
         $model = new LoginForm([
             'username' => 'bayer.hudson',
-            'password' => 'password_0',
+            'password' => 'secret',
         ]);
 
         expect('model should login user', $model->login())->true();

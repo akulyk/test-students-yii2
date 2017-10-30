@@ -1,55 +1,33 @@
-Yii 2 Advanced Project Template
-===============================
+Сделайте сайт для регистрации абитуриентов. Он состоит из 2 страниц: список зарегистрированных абитуриентов (главная страница) и форма ввода/редактирования информации о себе. Любой абитуриент может зайти на сайт и добавить себя в список или отредактировать информацию о себе.
+Форма содержит поля: имя, фамилия, пол, номер группы (от 2 до 5 цифр или букв), e-mail (должен быть уникален), суммарное число баллов на ВНО (проверять на адекватность), год рождения, местный или иногородний. Данные надо сохранять в БД, все поля обязательны, все поля надо проверять (например, нельзя ввести фамилию длиной 200 символов), при ошибке ввода отображать форму с сообщением об ошибке и выделенным красным цветом ошибочным полем, при успешном заполнении — спасибо, данные сохранены, вы можете их отредактировать или просмотреть список абитуриентов.
+После регистрации сайт должен запомнить пользователя и вместо формы регистрации показывать форму редактирования своих данных. Запомнить пользователя можно с помощью cookie, ставить на 10 лет. Надо использовать какой-то код, чтобы нельзя было отредактировать чужие данные.
+Список абитуриентов — выводит имя, фамилию, номер группы, число баллов. Выводятся по 50 человек на страницу, сортировка по любому полю делается кликом на заголовок колонки таблицы (по умолчанию по числу баллов вниз). Есть поле поиска, которое ищет сразу по всем строкам таблицы, регистронезависимо (то есть туда можно ввести номер группы либо часть имени/фамилии).
+Если ты можешь, то хорошо бы при поиске подсвечивать в таблице найденную часть слова, если нет, то не обязательно.
+Вот примерный вид списка:
+ 
+Список абитуриентов             Поиск: [___________][Найти]
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Имя       Фамилия               Номер группы     Баллов [▲]
+-----------------------------------------------------------
+Иван      Иванов                1010Э            180
+Петр      Петров                132М             220
+Сидор     Сидоров               0012             250
+...
+-----------------------------------------------------------
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+Страницы: [1]  2   3   4   5 
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+Вот примерный вид страницы результатов поиска (она выглядит практически как страница списка):
+Поиск абитуриентов               Поиск: [Иван_______][Найти]
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+Показаны только абитуриенты, найденные по запросу «Иван». 
+[Показать всех абитуриентов]
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
+......
+•HTML-шаблоны должны быть отделены от PHP кода
+•Надо использовать ООП.
+•Для работы с базой данных можно использовать PDO и паттерн TableDataGateway или любое другое решение.
+•Желательно использовать autoloading для подключения классов.
+•Для оформления формы и таблицы можно использовать готовый CSS-фреймворк Twitter Bootstrap или любое другое решение
+•Используйте любую удобную для вас систему контроля версий
 
-DIRECTORY STRUCTURE
--------------------
-
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-```
