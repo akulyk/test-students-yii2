@@ -50,6 +50,7 @@
   </ul>
 </p>
 
-<p>Email: mike.granovsky@mail.com</p>
+<p>Данные для входа</p>
+<p>Email: maks.bukovsky@mail.com</p>
 <p>Password: secret</p>
 
